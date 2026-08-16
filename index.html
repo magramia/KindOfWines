@@ -244,7 +244,7 @@
 </div>
 
 <script>
-const API_KEY = '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';
+
 
 let imagesBase64 = [];
 let loadingInterval = null;
@@ -422,9 +422,9 @@ Respond ONLY in this JSON:
   ];
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('/.netlify/functions/analyze-wine', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
@@ -461,12 +461,12 @@ Respond ONLY in this JSON:
   const content = [
     ...buildImageContent(),
     { type: 'text', text: userContext ? `Suggest one more wine.\n\n${userContext}` : 'Suggest one more wine from this list.' }
-  ];
+  ] ;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('/.netlify/functions/analyze-wine', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
