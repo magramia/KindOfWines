@@ -425,7 +425,7 @@ Respond ONLY in this JSON:
     const response = await fetch('/.netlify/functions/analyze-wine', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-5', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
     const text = data.content?.[0]?.text || '';
@@ -467,7 +467,7 @@ Respond ONLY in this JSON:
     const response = await fetch('/.netlify/functions/analyze-wine', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-5', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
     const text = data.content?.[0]?.text || '';
