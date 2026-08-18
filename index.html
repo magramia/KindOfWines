@@ -435,6 +435,7 @@ Respond ONLY in this JSON:
     stopLoadingMessages();
     renderResults(result);
   } catch (err) {
+    alert('ERRORE: ' + err.message);
     loadingSection.style.display = 'none';
     stopLoadingMessages();
     scanScreen.style.display = 'flex';
