@@ -430,9 +430,9 @@ Respond ONLY in this JSON:
     const rawText = await response.text();
 
    const data = JSON.parse(rawText);
-   ale
+  
     const text = data.content?.[0]?.text || ''; 
-   a
+  
     const result = JSON.parse(text.replace(/```json|```/g, '').trim());
     currentPodium = result;
     loadingSection.style.display = 'none';
