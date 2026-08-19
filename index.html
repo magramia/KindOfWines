@@ -428,6 +428,7 @@ Respond ONLY in this JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
+   alert('DATA: ' + JSON.stringify(data));
     const text = data.content?.[0]?.text || ''; 
    alert('RISPOSTA: ' + text);
     const result = JSON.parse(text.replace(/```json|```/g, '').trim());
@@ -472,6 +473,8 @@ Respond ONLY in this JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
+   alert('DATA: ' + JSON.stringify(data));
+   
     const text = data.content?.[0]?.text || '';
    alert('RISPOSTA: ' + text);
     const w = JSON.parse(text.replace(/```json|```/g, '').trim());
