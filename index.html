@@ -293,7 +293,7 @@ document.getElementById('howLink').addEventListener('click', () => {
 function addImages(files) {
   const remaining = 3 - imagesBase64.length;
   if (remaining <= 0) {
-    alert('Maximum 3 pages reached.');
+    
     return;
   }
   Array.from(files).slice(0, remaining).forEach(file => {
@@ -428,18 +428,18 @@ Respond ONLY in this JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const rawText = await response.text();
-alert('STATUS: ' + response.status + ' BODY: ' + rawText);
+alert(
    const data = JSON.parse(rawText);
-   alert('DATA: ' + JSON.stringify(data));
+   ale
     const text = data.content?.[0]?.text || ''; 
-   alert('RISPOSTA: ' + text);
+   a
     const result = JSON.parse(text.replace(/```json|```/g, '').trim());
     currentPodium = result;
     loadingSection.style.display = 'none';
     stopLoadingMessages();
     renderResults(result);
   } catch (err) {
-    alert('ERRORE: ' + err.message);
+    
     loadingSection.style.display = 'none';
     stopLoadingMessages();
     scanScreen.style.display = 'flex';
@@ -475,12 +475,12 @@ Respond ONLY in this JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const rawText = await response.text();
-   alert('STATUS: ' + response.status + ' BODY: ' + rawText);
+   
    const data = JSON.parse(rawText);
-   alert('DATA: ' + JSON.stringify(data));
+   
    
     const text = data.content?.[0]?.text || '';
-   alert('RISPOSTA: ' + text);
+   
     const w = JSON.parse(text.replace(/```json|```/g, '').trim());
     loadingSection.style.display = 'none';
     resultsSection.style.display = 'block';
