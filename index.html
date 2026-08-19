@@ -428,7 +428,8 @@ Respond ONLY in this JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const data = await response.json();
-    const text = data.content?.[0]?.text || '';
+    const text = data.content?.[0]?.text || ''; 
+   alert('RISPOSTA: ' + text);
     const result = JSON.parse(text.replace(/```json|```/g, '').trim());
     currentPodium = result;
     loadingSection.style.display = 'none';
@@ -472,6 +473,7 @@ Respond ONLY in this JSON:
     });
     const data = await response.json();
     const text = data.content?.[0]?.text || '';
+   alert('RISPOSTA: ' + text);
     const w = JSON.parse(text.replace(/```json|```/g, '').trim());
     loadingSection.style.display = 'none';
     resultsSection.style.display = 'block';
