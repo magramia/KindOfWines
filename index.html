@@ -428,7 +428,7 @@ Respond ONLY in this JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
     });
     const rawText = await response.text();
-alert(
+
    const data = JSON.parse(rawText);
    ale
     const text = data.content?.[0]?.text || ''; 
