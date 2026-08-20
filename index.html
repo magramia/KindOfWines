@@ -462,10 +462,9 @@ async function analyzeExtra() {
 Already suggested: ${alreadySuggested}
 
 Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions.
-CRITICAL LANGUAGE RULE: Even though you are described as an Italian sommelier, you must write your ENTIRE response (all reasons, all text) in the same language as the customer's message below. Do not default to Italian. If the customer wrote in English, respond entirely in English. If no customer message is provided, respond in English.
+CRITICAL LANGUAGE RULE: Even though you are described as an Italian sommelier, you must write your ENTIRE response (all reasons, all text) in the same language as the customer's message below. Do not default to Italian. If the customer wrote in English, respond entirely in English. If no customer message is provided, respond in Italian.
 Respond ONLY in this JSON:
 { "name": "...", "producer": "...", "price": "€XX", "reason": "One elegant surprising sentence." }`;
-alert('USER CONTEXT: ' + userContext);
   const content = [
     ...buildImageContent(),
     { type: 'text', text: userContext ? `Suggest one more wine.\n\n${userContext}` : 'Suggest one more wine from this list.' }
