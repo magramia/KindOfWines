@@ -420,7 +420,7 @@ Analyze the wine list photo(s) and select exactly 3 wines:
 
 Rules: respect budget strictly. Each reason must be elegant, specific, insider — never generic.
 CRITICAL LANGUAGE RULE: Write your entire response (all reasons, all text) in ${window.userLangName}. Ignore the language of any text in the customer context below — always respond in ${window.userLangName}.
-Respond ONLY in this JSON:
+Before the JSON, write one short introductory sentence like "Ecco la mia selezione:". Then provide the JSON:
 {
   "top": { "name": "...", "producer": "...", "price": "€XX", "reason": "..." },
   "value": { "name": "...", "producer": "...", "price": "€XX", "reason": "..." },
@@ -471,7 +471,7 @@ Already suggested: ${alreadySuggested}
 
 Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions.
 CRITICAL LANGUAGE RULE: Write your entire response (all reasons, all text) in ${window.userLangName}. Ignore the language of any text in the customer context below — always respond in ${window.userLangName}.
-Respond ONLY in this JSON:
+Before the JSON, write one short introductory sentence like "Ecco la mia selezione:". Then provide the JSON:
 { "name": "...", "producer": "...", "price": "€XX", "reason": "One elegant surprising sentence." }`;
   const content = [
     ...buildImageContent(),
