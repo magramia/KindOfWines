@@ -444,7 +444,7 @@ Respond ONLY in this JSON:
   
     const text = data.content?.[0]?.text || ''; 
   
-    const result = JSON.parse(text.replace(/```json|```/g, '').trim());
+    const result = extractJSON(text);
     currentPodium = result;
     loadingSection.style.display = 'none';
     stopLoadingMessages();
