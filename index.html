@@ -417,7 +417,7 @@ Respond ONLY in this JSON:
   "value": { "name": "...", "producer": "...", "price": "€XX", "reason": "..." },
   "bold": { "name": "...", "producer": "...", "price": "€XX", "reason": "..." }
 }`;
-alert('SYSTEM PROMPT: ' + systemPrompt);
+
   const content = [
     ...buildImageContent(),
     { type: 'text', text: userContext ? `Select my personal podium.\n\n${userContext}` : 'Select the most interesting podium from this wine list.' }
