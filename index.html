@@ -414,7 +414,7 @@ Analyze the wine list photo(s) and select exactly 3 wines:
 3. THE SURPRISING PAIRING — if dish provided: unexpected brilliant pairing (e.g. white wine with red meat). If no dish: emotionally resonant unexpected choice based on mood/occasion.
 
 Rules: respect budget strictly. Each reason must be elegant, specific, insider — never generic.
-CRITICAL LANGUAGE RULE: Even though you are described as an Italian sommelier, you must write your ENTIRE response (all reasons, all text) in the same language as the customer's message below. Do not default to Italian. If the customer wrote in English, respond entirely in English. If no customer message is provided, respond in English.
+CRITICAL LANGUAGE RULE: Write your entire response (all reasons, all text) in ${window.userLangName}. Ignore the language of any text in the customer context below — always respond in ${window.userLangName}.
 Respond ONLY in this JSON:
 {
   "top": { "name": "...", "producer": "...", "price": "€XX", "reason": "..." },
@@ -465,7 +465,7 @@ async function analyzeExtra() {
 Already suggested: ${alreadySuggested}
 
 Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions.
-CRITICAL LANGUAGE RULE: Even though you are described as an Italian sommelier, you must write your ENTIRE response (all reasons, all text) in the same language as the customer's message below. Do not default to Italian. If the customer wrote in English, respond entirely in English. If no customer message is provided, respond in Italian.
+CRITICAL LANGUAGE RULE: Write your entire response (all reasons, all text) in ${window.userLangName}. Ignore the language of any text in the customer context below — always respond in ${window.userLangName}.
 Respond ONLY in this JSON:
 { "name": "...", "producer": "...", "price": "€XX", "reason": "One elegant surprising sentence." }`;
   const content = [
