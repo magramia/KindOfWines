@@ -251,6 +251,7 @@
 
 let imagesBase64 = [];
 let loadingInterval = null;
+let loadingReassuranceTimeout = null;
 const loadingMessages = [
   'Your secret sommelier is at work…',
   'Reading the wine list…',
@@ -268,10 +269,14 @@ function startLoadingMessages() {
     i = (i + 1) % messages.length;
     if (el) el.textContent = messages[i];
   }, 2500);
+  loadingReassuranceTimeout = setTimeout(() => {
+    if (el) el.textContent = 'Still working — great wine lists take a moment to study…';
+  }, 15000);
 }
 
 function stopLoadingMessages() {
   if (loadingInterval) { clearInterval(loadingInterval); loadingInterval = null; }
+  if (loadingReassuranceTimeout) { clearTimeout(loadingReassuranceTimeout); loadingReassuranceTimeout = null; }
 }
 let currentPodium = null;
 
