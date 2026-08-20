@@ -397,7 +397,10 @@ function buildImageContent() {
     source: { type: 'base64', media_type: 'image/jpeg', data: b64 }
   }));
 }
-
+const LANG_NAMES = { it: 'Italian', en: 'English', fr: 'French', de: 'German', es: 'Spanish', pt: 'Portuguese', ja: 'Japanese', zh: 'Chinese' };
+const userLangCode = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
+window.userLangName = LANG_NAMES[userLangCode] || 'English';
+ 
 async function analyze() {
   loadingSection.style.display = 'flex';
   const userContext = getContext();
