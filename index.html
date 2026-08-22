@@ -560,7 +560,7 @@ Already suggested: ${alreadySuggested}
 Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions. If the photo(s) do not show a readable wine list, respond ONLY with this JSON instead: { "error": "unreadable" }. Do not guess or invent a wine if you cannot clearly read a wine list.
 CRITICAL LANGUAGE RULE: The customer's selected language is ${window.userLangName}. You MUST write your entire response — every single word, the "reason" field — in ${window.userLangName}. This is non-negotiable. Do NOT use English or Italian unless ${window.userLangName} is English or Italian. Ignore the language of any text in the customer context below — that text may be in a different language, but your response must always be in ${window.userLangName}.
 Respond ONLY in this JSON:
-{ "name": "...", "producer": "...", "price": "€XX", "reason": "One elegant surprising sentence." }`;
+{ "name": "...", "producer": "...", "price": "€XX", "reason": "..." }`;
   const content = [
     ...buildImageContent(),
     { type: 'text', text: userContext ? `Suggest one more wine.\n\n${userContext}` : 'Suggest one more wine from this list.' }
