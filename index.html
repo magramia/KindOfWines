@@ -470,7 +470,9 @@ async function analyze() {
 
   const systemPrompt = `You are an elite Italian sommelier with encyclopedic knowledge of wines from every region of the world. You are sophisticated and known for surprising choices that reveal deep expertise.
 
-Analyze the wine list photo(s) and select exactly 3 wines:
+Analyze the wine list photo(s) and select exactly 3 wines. If the photo(s) do not show a readable wine list (e.g. blurry, wrong subject, physical bottles instead of a written list, or no wine-related text visible), respond ONLY with this JSON instead: { "error": "unreadable" }. Do not guess or invent wines if you cannot clearly read a wine list.
+
+If a valid wine list is visible:
 
 1. THE GREAT CLASSIC — the most authoritative, reliable, prestigious choice. A wine that commands respect.
 2. THE GREAT OUTSIDER — rare indigenous grape, small unknown producer, unusual region. Surprises even experts.
@@ -503,7 +505,15 @@ Respond ONLY in this JSON:
     const text = data.content?.[0]?.text || ''; 
   
     const result = extractJSON(text);
-    currentPodium = result;
+if (result.error === 'unreadable') {
+  loadingSection.style.display = 'none';
+  stopLoadingMessages();
+  scanScreen.style.display = 'flex';
+  document.getElementById('errorMsg').style.display = 'block';
+  document.getElementById('errorMsg').textContent = 'Non riesco a leggere una carta dei vini in questa foto. Prova con un\'altra immagine, più chiara.';
+  return;
+}
+currentPodium = result;
     loadingSection.style.display = 'none';
     stopLoadingMessages();
     renderResults(result);
