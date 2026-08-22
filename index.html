@@ -221,7 +221,7 @@
 
 <!-- SCREEN 4: RESULTS -->
 <div class="results" id="resultsSection">
-<button class="secondary-btn" onclick="document.getElementById('resultsSection').style.display='none'; document.getElementById('scanScreen').style.display='flex';">← Back</button>
+<button class="secondary-btn" id="resultsBackBtn">← Back</button>
   <div class="results-header">
     <p class="results-eyebrow">4 / 4 — Your personal selection</p>
     <h2 class="results-title">Your podium</h2>
@@ -433,6 +433,9 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   resultsSection.style.display = 'none';
   scanScreen.style.display = 'flex';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+ document.getElementById('resultsBackBtn').addEventListener('click', () => {
+  document.getElementById('resetBtn').click();
 });
 
 function getContext() {
