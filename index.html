@@ -402,16 +402,21 @@ document.getElementById('analyzeBtn').addEventListener('click', () => {
     document.getElementById('errorMsg').textContent = 'Please photograph the wine list first.';
     return;
   }
-  scanScreen.style.display = 'none';
-  paymentScreen.style.display = 'flex';
+  if (hasPaid) {
+    scanScreen.style.display = 'none';
+    analyze(false);
+  } else {
+    scanScreen.style.display = 'none';
+    paymentScreen.style.display = 'flex';
+  }
 });
 
 document.getElementById('payBtn').addEventListener('click', () => {
   // Simulated payment — will be replaced with Stripe
+  hasPaid = true;
   paymentScreen.style.display = 'none';
   analyze(false);
 });
-
 document.getElementById('retryBtn').addEventListener('click', () => {
   document.getElementById('retryBtn').style.display = 'none';
   document.getElementById('extraWine').style.display = 'none';
@@ -421,6 +426,7 @@ document.getElementById('retryBtn').addEventListener('click', () => {
 document.getElementById('resetBtn').addEventListener('click', () => {
   imagesBase64 = [];
   currentPodium = null;
+ hasPaid = false
   document.getElementById('fileInput').value = '';
   document.getElementById('addMoreInput').value = '';
   document.getElementById('thumbnails').innerHTML = '';
