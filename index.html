@@ -537,7 +537,7 @@ async function analyzeExtra() {
 
 Already suggested: ${alreadySuggested}
 
-Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions.
+Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions. If the photo(s) do not show a readable wine list, respond ONLY with this JSON instead: { "error": "unreadable" }. Do not guess or invent a wine if you cannot clearly read a wine list.
 CRITICAL LANGUAGE RULE: Write your entire response (all reasons, all text) in ${window.userLangName}. Ignore the language of any text in the customer context below — always respond in ${window.userLangName}.
 Respond ONLY in this JSON:
 { "name": "...", "producer": "...", "price": "€XX", "reason": "One elegant surprising sentence." }`;
@@ -560,8 +560,15 @@ Respond ONLY in this JSON:
     const text = data.content?.[0]?.text || '';
    
     const w = extractJSON(text);
-    loadingSection.style.display = 'none';
-    resultsSection.style.display = 'block';
+if (w.error === 'unreadable') {
+  loadingSection.style.display = 'none';
+  resultsSection.style.display = 'block';
+  document.getElementById('errorMsg').style.display = 'block';
+  document.getElementById('errorMsg').textContent = 'Non riesco a leggere una carta dei vini in questa foto. Prova con un\'altra immagine, più chiara.';
+  return;
+}
+loadingSection.style.display = 'none';
+resultsSection.style.display = 'block'
     document.getElementById('extraWine').style.display = 'block';
     document.getElementById('extraName').textContent = w.name || '';
     document.getElementById('extraProducer').textContent = w.producer || '';
