@@ -467,7 +467,6 @@ function buildImageContent() {
 }
 const LANG_NAMES = { it: 'Italian', en: 'English', fr: 'French', de: 'German', es: 'Spanish', pt: 'Portuguese', ja: 'Japanese', zh: 'Chinese' };
 const userLangCode = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
-alert('DEBUG navigator.language = ' + navigator.language + ' | userLangCode = ' + userLangCode);
 const UNREADABLE_MESSAGES = {
   it: 'Non riesco a leggere una carta dei vini in questa foto. Prova con un\'altra immagine, più chiara.',
   en: 'I can\'t read a wine list in this photo. Please try a clearer image.',
