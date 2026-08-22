@@ -484,6 +484,29 @@ function extractJSON(text) {
   if (start === -1 || end === -1) throw new Error('No JSON found in response');
   return JSON.parse(text.slice(start, end + 1));
 }
+function looksLikeWrongLanguage(text, langCode) {
+  if (!text) return false;
+  const stopwords = {
+    it: ['il ','la ','di ','che ','con ','una ','sono ','questo ','della ','per '],
+    en: ['the ','and ','with ','this ','that ','is ','of ','for '],
+    fr: ['le ','la ','de ','et ','avec ','ce ','est ','une ','pour '],
+    de: ['der ','die ','das ','und ','mit ','ist ','eine ','für ','sich '],
+    es: ['el ','la ','de ','y ','con ','este ','es ','una ','para '],
+    pt: ['o ','a ','de ','e ','com ','este ','é ','uma ','para ']
+  };
+  const lower = ' ' + text.toLowerCase() + ' ';
+  if (langCode === 'ja') return !/[\u3040-\u30FF]/.test(text);
+  if (langCode === 'zh') return !/[\u4E00-\u9FFF]/.test(text) || /[\u3040-\u30FF]/.test(text);
+  const expectedWords = stopwords[langCode];
+  if (!expectedWords) return false;
+  const expectedCount = expectedWords.filter(w => lower.includes(w)).length;
+  if (expectedCount > 0) return false;
+  let otherCount = 0;
+  for (const code in stopwords) {
+    if (code === langCode) continue;
+    otherCount += stopwords[code].filter(w => lower.includes(w)).length;
+  }
+  return otherCount >= 2;
 async function analyze() {
   loadingSection.style.display = 'flex';
   const userContext = getContext();
@@ -524,7 +547,22 @@ Respond ONLY in this JSON:
   
     const text = data.content?.[0]?.text || ''; 
   
-    const result = extractJSON(text);
+    let result = extractJSON(text);
+const checkText = [result.top?.reason, result.value?.reason, result.bold?.reason].filter(Boolean).join(' ');
+if (looksLikeWrongLanguage(checkText, userLangCode)) {
+  try {
+    const retryResponse = await fetch('/.netlify/functions/analyze-wine', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content }] })
+    });
+    const retryRawText = await retryResponse.text();
+    const retryData = JSON.parse(retryRawText);
+    const retryText = retryData.content?.[0]?.text || '';
+    const retryResult = extractJSON(retryText);
+    if (retryResult.error !== 'unreadable') result = retryResult;
+  } catch (e) {}
+}
 if (result.error === 'unreadable') {
   loadingSection.style.display = 'none';
   stopLoadingMessages();
@@ -579,7 +617,21 @@ Respond ONLY in this JSON:
    
     const text = data.content?.[0]?.text || '';
    
-    const w = extractJSON(text);
+    let w = extractJSON(text);
+if (looksLikeWrongLanguage(w.reason, userLangCode)) {
+  try {
+    const retryResponse = await fetch('/.netlify/functions/analyze-wine', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content }] })
+    });
+    const retryRawText = await retryResponse.text();
+    const retryData = JSON.parse(retryRawText);
+    const retryText = retryData.content?.[0]?.text || '';
+    const retryResult = extractJSON(retryText);
+    if (retryResult.error !== 'unreadable') w = retryResult;
+  } catch (e) {}
+}
 if (w.error === 'unreadable') {
   loadingSection.style.display = 'none';
   resultsSection.style.display = 'block';
