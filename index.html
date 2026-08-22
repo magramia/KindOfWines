@@ -457,7 +457,17 @@ function buildImageContent() {
 }
 const LANG_NAMES = { it: 'Italian', en: 'English', fr: 'French', de: 'German', es: 'Spanish', pt: 'Portuguese', ja: 'Japanese', zh: 'Chinese' };
 const userLangCode = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
-window.userLangName = LANG_NAMES[userLangCode] || 'English';
+const UNREADABLE_MESSAGES = {
+  it: 'Non riesco a leggere una carta dei vini in questa foto. Prova con un\'altra immagine, più chiara.',
+  en: 'I can\'t read a wine list in this photo. Please try a clearer image.',
+  fr: 'Je n\'arrive pas à lire une carte des vins sur cette photo. Essayez avec une image plus claire.',
+  de: 'Ich kann in diesem Foto keine Weinkarte erkennen. Bitte versuchen Sie es mit einem klareren Bild.',
+  es: 'No puedo leer una carta de vinos en esta foto. Prueba con una imagen más clara.',
+  pt: 'Não consigo ler uma carta de vinhos nesta foto. Tente com uma imagem mais nítida.',
+  ja: 'この写真ではワインリストを読み取れません。より鮮明な画像でもう一度お試しください。',
+  zh: '我无法从这张照片中读取酒单。请尝试使用更清晰的图片。'
+};
+window.unreadableMessage = UNREADABLE_MESSAGES[userLangCode] || UNREADABLE_MESSAGES.en;
 function extractJSON(text) {
   const start = text.indexOf('{');
   const end = text.lastIndexOf('}');
@@ -510,7 +520,7 @@ if (result.error === 'unreadable') {
   stopLoadingMessages();
   scanScreen.style.display = 'flex';
   document.getElementById('errorMsg').style.display = 'block';
-  document.getElementById('errorMsg').textContent = 'Non riesco a leggere una carta dei vini in questa foto. Prova con un\'altra immagine, più chiara.';
+  document.getElementById('errorMsg').textContent = window.unreadableMessage;
   return;
 }
 currentPodium = result;
@@ -564,7 +574,7 @@ if (w.error === 'unreadable') {
   loadingSection.style.display = 'none';
   resultsSection.style.display = 'block';
   document.getElementById('errorMsg').style.display = 'block';
-  document.getElementById('errorMsg').textContent = 'Non riesco a leggere una carta dei vini in questa foto. Prova con un\'altra immagine, più chiara.';
+  document.getElementById('errorMsg').textContent = window.unreadableMessage;
   return;
 }
 loadingSection.style.display = 'none';
