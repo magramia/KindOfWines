@@ -487,12 +487,12 @@ function extractJSON(text) {
 function looksLikeWrongLanguage(text, langCode) {
   if (!text) return false;
   const stopwords = {
-    it: ['il ','la ','di ','che ','con ','una ','sono ','questo ','della ','per '],
-    en: ['the ','and ','with ','this ','that ','is ','of ','for '],
-    fr: ['le ','la ','de ','et ','avec ','ce ','est ','une ','pour '],
-    de: ['der ','die ','das ','und ','mit ','ist ','eine ','für ','sich '],
-    es: ['el ','la ','de ','y ','con ','este ','es ','una ','para '],
-    pt: ['o ','a ','de ','e ','com ','este ','é ','uma ','para ']
+    it: [' della ',' questo ',' sono ',' anche ',' perfetto ',' bottiglia ',' vino ',' elegante '],
+    en: [' the ',' with ',' this ',' that ',' wine ',' bottle ',' elegant ',' perfect '],
+    fr: [' avec ',' cette ',' est ',' vin ',' bouteille ',' élégant ',' parfait '],
+    de: [' und ',' mit ',' ist ',' eine ',' für ',' sich ',' wein ',' flasche '],
+    es: [' con ',' este ',' es ',' vino ',' botella ',' elegante ',' perfecto '],
+    pt: [' com ',' este ',' é ',' vinho ',' garrafa ',' elegante ',' perfeito ']
   };
   const lower = ' ' + text.toLowerCase() + ' ';
   if (langCode === 'ja') return !/[\u3040-\u30FF]/.test(text);
