@@ -523,7 +523,7 @@ If a valid wine list is visible:
 3. THE SURPRISING PAIRING — if dish provided: unexpected brilliant pairing (e.g. white wine with red meat). If no dish: emotionally resonant unexpected choice based on mood/occasion.
 
 Rules: respect budget strictly. Each reason must be elegant, specific, insider — never generic.
-CRITICAL LANGUAGE RULE: The customer's selected language is ${window.userLangName}. You MUST write your entire response — every single word, every reason, the "reason" field for all three wines — in ${window.userLangName}. This is non-negotiable. Do NOT use English or Italian unless ${window.userLangName} is English or Italian. Ignore the language of any text in the customer context below (dish, mood, occasion) — that text may be in a different language, but your response must always be in ${window.userLangName}
+CRITICAL LANGUAGE RULE: The customer's selected language is ${window.userLangName}. You MUST write your entire response in ${window.userLangName}. If you are truly unable to write in ${window.userLangName}, use English as a fallback — but NEVER Italian, even though you are an Italian sommelier. Italian is strictly forbidden unless ${window.userLangName} is Italian. Ignore the language of any text in the customer context below
 Respond ONLY in this JSON:
 {
   "top": { "name": "...", "producer": "...", "price": "€XX", "reason": "..." },
@@ -597,7 +597,7 @@ async function analyzeExtra() {
 Already suggested: ${alreadySuggested}
 
 Choose ONE wine not already suggested. It should be surprising, elegant, and different in style from the previous suggestions. If the photo(s) do not show a readable wine list, respond ONLY with this JSON instead: { "error": "unreadable" }. Do not guess or invent a wine if you cannot clearly read a wine list.
-CRITICAL LANGUAGE RULE: The customer's selected language is ${window.userLangName}. You MUST write your entire response — every single word, the "reason" field — in ${window.userLangName}. This is non-negotiable. Do NOT use English or Italian unless ${window.userLangName} is English or Italian. Ignore the language of any text in the customer context below — that text may be in a different language, but your response must always be in ${window.userLangName}.
+CRITICAL LANGUAGE RULE: The customer's selected language is ${window.userLangName}. You MUST write your entire response in ${window.userLangName}. If you are truly unable to write in ${window.userLangName}, use English as a fallback — but NEVER Italian, even though you are a sommelier trained in the Italian tradition. Italian is strictly forbidden unless ${window.userLangName} is Italian. Ignore the language of any text in the customer context below
 Respond ONLY in this JSON:
 { "name": "...", "producer": "...", "price": "€XX", "reason": "..." }`;
   const content = [
