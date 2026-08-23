@@ -507,6 +507,7 @@ function looksLikeWrongLanguage(text, langCode) {
     otherCount += stopwords[code].filter(w => lower.includes(w)).length;
   }
   return otherCount >= 2;
+ }
 async function analyze() {
   loadingSection.style.display = 'flex';
   const userContext = getContext();
