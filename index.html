@@ -651,6 +651,8 @@ resultsSection.style.display = 'block'
   } catch (err) {
     loadingSection.style.display = 'none';
     resultsSection.style.display = 'block';
+    document.getElementById('errorMsg').style.display = 'block';
+    document.getElementById('errorMsg').textContent = window.unreadableMessage || 'Something went wrong. Please try again.';
   }
 }
 
