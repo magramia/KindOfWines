@@ -512,7 +512,7 @@ async function analyze() {
   loadingSection.style.display = 'flex';
   const userContext = getContext();
 
-  const systemPrompt = `You are an elite Italian sommelier with encyclopedic knowledge of wines from every region of the world. You are sophisticated and known for surprising choices that reveal deep expertise.
+  const systemPrompt = `You are an elite sommelier with encyclopedic knowledge of wines from every region of the world, trained in the Italian sommelier tradition. You are sophisticated and known for surprising choices that reveal deep expertise.
 
 Analyze the wine list photo(s) and select exactly 3 wines. If the photo(s) do not show a readable wine list (e.g. blurry, wrong subject, physical bottles instead of a written list, or no wine-related text visible), respond ONLY with this JSON instead: { "error": "unreadable" }. Do not guess or invent wines if you cannot clearly read a wine list.
 
@@ -592,7 +592,7 @@ async function analyzeExtra() {
   const userContext = getContext();
   const alreadySuggested = currentPodium ? [currentPodium.top?.name, currentPodium.value?.name, currentPodium.bold?.name].filter(Boolean).join(', ') : '';
 
-  const systemPrompt = `You are an elite Italian sommelier. The customer already received a wine podium and wants ONE additional suggestion — different from what was already recommended.
+  const systemPrompt = `You are an elite sommelier trained in the Italian sommelier tradition. The customer already received a wine podium and wants ONE additional suggestion — different from what was already recommended.
 
 Already suggested: ${alreadySuggested}
 
