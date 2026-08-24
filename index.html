@@ -267,8 +267,10 @@ if (window.location.search.includes('payment=success')) {
         if (document.getElementById('occasionInput')) document.getElementById('occasionInput').value = ctx.occasion || '';
       }
       document.getElementById('welcomeScreen').style.display = 'none';
-      document.getElementById('scanScreen').style.display = 'none';
-      analyze(false);
+document.getElementById('scanScreen').style.display = 'none';
+document.getElementById('loadingSection').style.display = 'flex';
+document.getElementById('loadingText').textContent = 'Payment confirmed ✓';
+setTimeout(() => analyze(false), 1200);
       sessionStorage.removeItem('kow_images');
       sessionStorage.removeItem('kow_context');
     });
