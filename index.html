@@ -252,6 +252,28 @@
 
 let imagesBase64 = [];
 let hasPaid = false;
+if (window.location.search.includes('payment=success')) {
+  const savedImages = sessionStorage.getItem('kow_images');
+  const savedContext = sessionStorage.getItem('kow_context');
+  if (savedImages) {
+    imagesBase64 = JSON.parse(savedImages);
+    hasPaid = true;
+    window.addEventListener('DOMContentLoaded', () => {
+      if (savedContext) {
+        const ctx = JSON.parse(savedContext);
+        if (document.getElementById('dishInput')) document.getElementById('dishInput').value = ctx.dish || '';
+        if (document.getElementById('budgetInput')) document.getElementById('budgetInput').value = ctx.budget || '';
+        if (document.getElementById('moodInput')) document.getElementById('moodInput').value = ctx.mood || '';
+        if (document.getElementById('occasionInput')) document.getElementById('occasionInput').value = ctx.occasion || '';
+      }
+      document.getElementById('welcomeScreen').style.display = 'none';
+      document.getElementById('scanScreen').style.display = 'none';
+      analyze(false);
+      sessionStorage.removeItem('kow_images');
+      sessionStorage.removeItem('kow_context');
+    });
+  }
+}
 let loadingInterval = null;
 let loadingReassuranceTimeout = null;
 const loadingMessagesByLang = {
