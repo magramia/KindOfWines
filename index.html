@@ -412,11 +412,27 @@ document.getElementById('analyzeBtn').addEventListener('click', () => {
   }
 });
 
-document.getElementById('payBtn').addEventListener('click', () => {
-  // Simulated payment — will be replaced with Stripe
-  hasPaid = true;
-  paymentScreen.style.display = 'none';
-  analyze(false);
+document.getElementById('payBtn').addEventListener('click', async () => {
+  sessionStorage.setItem('kow_images', JSON.stringify(imagesBase64));
+  sessionStorage.setItem('kow_context', JSON.stringify({
+    dish: document.getElementById('dishInput').value,
+    budget: document.getElementById('budgetInput').value,
+    mood: document.getElementById('moodInput').value,
+    occasion: document.getElementById('occasionInput').value
+  }));
+  try {
+    const response = await fetch('/.netlify/functions/create-checkout', { method: 'POST' });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      document.getElementById('errorMsg').style.display = 'block';
+      document.getElementById('errorMsg').textContent = 'Payment error. Please try again.';
+    }
+  } catch (err) {
+    document.getElementById('errorMsg').style.display = 'block';
+    document.getElementById('errorMsg').textContent = 'Payment error. Please try again.';
+  }
 });
 document.getElementById('retryBtn').addEventListener('click', () => {
   document.getElementById('retryBtn').style.display = 'none';
