@@ -268,9 +268,7 @@ if (window.location.search.includes('payment=success')) {
       }
       document.getElementById('welcomeScreen').style.display = 'none';
 document.getElementById('scanScreen').style.display = 'none';
-document.getElementById('loadingSection').style.display = 'flex';
-document.getElementById('loadingText').textContent = 'Payment confirmed ✓';
-setTimeout(() => analyze(false), 1200);
+analyze(false);
       sessionStorage.removeItem('kow_images');
       sessionStorage.removeItem('kow_context');
     });
